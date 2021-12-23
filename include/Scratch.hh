@@ -65,7 +65,6 @@ void run();
 
 int main()
 {
-    std::cout << "\n";
     run();
 }
 
