@@ -25,3 +25,9 @@ target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Weffc++ -pedantic)
 # Use threads
 find_package(Threads)
 target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
+
+add_custom_target(run
+    COMMAND ${PROJECT_OUTPUT_DIRECTORY}/${PROJECT_NAME}
+    DEPENDS ${PROJECT_OUTPUT_DIRECTORY}/${PROJECT_NAME}
+    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
+)
