@@ -2,7 +2,7 @@
 #include "Scratch.hh"
 using namespace std;
 
-void run()
+int main()
 {
     std::cout << "Hello, World!" << "\n";
 }
