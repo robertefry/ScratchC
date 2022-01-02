@@ -107,7 +107,6 @@ namespace util
 
     template <typename C = char, typename ForwardIterable>
     StringList<C> make_stringlist(ForwardIterable const& data)
-        requires requires (ForwardIterable e) { ++e.begin() != e.end(); }
     {
         StringList<C> list;
 
