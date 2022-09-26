@@ -118,18 +118,13 @@ namespace util
 } // namespace util
 
 /* ************************************************************************** */
-//  Standard Extensions
+//  Global Operators
 /* ************************************************************************** */
 
-namespace std
+template <typename C = char>
+std::basic_ostream<C>& operator<<(std::basic_ostream<C>& ost, util::StringList<C> const& strl)
 {
-
-    template <typename C = char>
-    std::basic_ostream<C>& operator<<(std::basic_ostream<C>& ost, util::StringList<C> const& strl)
-    {
-        return ost << strl.to_string();
-    }
-
-} // namespace std
+    return ost << strl.to_string();
+}
 
 #endif /* __HH_UTIL_STRING_LIST */
