@@ -149,34 +149,34 @@ namespace util
 
 template <typename C>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::strong_ordering& ord)
+operator<<(std::basic_ostream<C>& ost, std::strong_ordering const& ord)
 {
     if (ord == std::strong_ordering::equal)         return ost << "strong_ordering::equal";
     if (ord == std::strong_ordering::equivalent)    return ost << "strong_ordering::equivalent";
     if (ord == std::strong_ordering::less)          return ost << "strong_ordering::less";
     if (ord == std::strong_ordering::greater)       return ost << "strong_ordering::greater";
-    return ost << "strong_ordering::[?]";
+    return ost << "strong_ordering";
 }
 
 template <typename C>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::weak_ordering& ord)
+operator<<(std::basic_ostream<C>& ost, std::weak_ordering const& ord)
 {
     if (ord == std::weak_ordering::equivalent)  return ost << "weak_ordering::equivalent";
     if (ord == std::weak_ordering::less)        return ost << "weak_ordering::less";
     if (ord == std::weak_ordering::greater)     return ost << "weak_ordering::greater";
-    return ost << "weak_ordering::[?]";
+    return ost << "weak_ordering";
 }
 
 template <typename C>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::partial_ordering& ord)
+operator<<(std::basic_ostream<C>& ost, std::partial_ordering const& ord)
 {
     if (ord == std::partial_ordering::equivalent)   return ost << "partial_ordering::equivalent";
     if (ord == std::partial_ordering::less)         return ost << "partial_ordering::less";
     if (ord == std::partial_ordering::greater)      return ost << "partial_ordering::greater";
     if (ord == std::partial_ordering::unordered)    return ost << "partial_ordering::unordered";
-    return ost << "partial_ordering::[?]";
+    return ost << "partial_ordering";
 }
 
 
