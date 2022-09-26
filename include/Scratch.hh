@@ -101,49 +101,6 @@ struct LifetimeTracker
 
 
 /* ************************************************************************** */
-//  Utility StringList
-/* ************************************************************************** */
-
-#include "StringList.hh"
-
-namespace util
-{
-
-    template <typename C = char, typename ForwardIterable>
-    StringList<C> make_stringlist(ForwardIterable const& data)
-    {
-        StringList<C> list;
-
-        for (auto itr = data.begin(); itr != data.end(); ++itr)
-        {
-            list << *itr;
-        }
-        return list;
-    }
-
-    template <typename C = char, size_t I, size_t J, typename... Args>
-    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
-    {
-        StringList<C> list;
-
-        if constexpr (I < J)
-        {
-            list << std::get<I>(tuple);
-            list.push_back(make_stringlist<C,I+1,J>(tuple));
-        }
-        return list;
-    }
-
-    template <typename C = char, typename... Args>
-    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
-    {
-        return make_stringlist<C,0,sizeof...(Args),Args...>(tuple);
-    }
-
-} // namespace util
-
-
-/* ************************************************************************** */
 //  Print Operator Overloads for Three-Way Comparison
 /* ************************************************************************** */
 
@@ -183,6 +140,44 @@ operator<<(std::basic_ostream<C>& ost, std::partial_ordering const& ord)
 /* ************************************************************************** */
 //  Print Operator Overloads for STL Containers
 /* ************************************************************************** */
+
+namespace util
+{
+
+    template <typename C>
+    class StringList;
+
+    template <typename C = char, typename ForwardIterable>
+    StringList<C> make_stringlist(ForwardIterable const& data)
+    {
+        StringList<C> list;
+
+        for (auto itr = data.begin(); itr != data.end(); ++itr)
+        {
+            list << *itr;
+        }
+        return list;
+    }
+
+    template <typename C = char, size_t I, size_t J, typename... Args>
+    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
+    {
+        StringList<C> list;
+
+        if constexpr (I < J)
+        {
+            list << std::get<I>(tuple);
+            list.push_back(make_stringlist<C,I+1,J>(tuple));
+        }
+        return list;
+    }
+    template <typename C = char, typename... Args>
+    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
+    {
+        return make_stringlist<C,0,sizeof...(Args),Args...>(tuple);
+    }
+
+} // namespace util
 
 template <typename C, typename... Args>
 inline std::basic_ostream<C>&
@@ -281,5 +276,7 @@ operator<<(std::basic_ostream<C>& ost, const std::span<T,N>& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
+
+#include "StringList.hh"
 
 #endif /* __HH_SCRATCH */
