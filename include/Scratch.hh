@@ -179,100 +179,100 @@ namespace util
 
 } // namespace util
 
+template <typename C, typename T>
+inline std::basic_ostream<C>&
+operator<<(std::basic_ostream<C>& ost, std::initializer_list<T> const& data)
+{
+    return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
+}
+
 template <typename C, typename... Args>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::tuple<Args...>& data)
-{
-    return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
-}
-
-template <typename C, typename T>
-inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::initializer_list<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::tuple<Args...> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T, size_t N>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::array<T,N>& data)
+operator<<(std::basic_ostream<C>& ost, std::array<T,N> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::vector<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::vector<T> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::list<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::list<T> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::queue<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::queue<T> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::set<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::set<T> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::unordered_set<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::unordered_set<T> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::unordered_multiset<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::unordered_multiset<T> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename K, typename V>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::map<K,V>& data)
+operator<<(std::basic_ostream<C>& ost, std::map<K,V> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename K, typename V>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::unordered_map<K,V>& data)
+operator<<(std::basic_ostream<C>& ost, std::unordered_map<K,V> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename K, typename V>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::unordered_multimap<K,V>& data)
+operator<<(std::basic_ostream<C>& ost, std::unordered_multimap<K,V> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::span<T>& data)
+operator<<(std::basic_ostream<C>& ost, std::span<T> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename T, size_t N>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, const std::span<T,N>& data)
+operator<<(std::basic_ostream<C>& ost, std::span<T,N> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
