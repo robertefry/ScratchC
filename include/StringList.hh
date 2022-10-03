@@ -33,9 +33,50 @@ namespace util
         std::basic_string<C> to_string(std::basic_string<C> const& delim = " ") const;
 
     private:
-        std::basic_string<C> m_Delim{};
         std::list<std::basic_string<C>> m_List{};
     };
+
+} // namespace util
+
+/* ************************************************************************** */
+//  Helper Functions
+/* ************************************************************************** */
+
+namespace util
+{
+
+    template <typename C>
+    class StringList;
+
+    template <typename C = char, typename ForwardIterable>
+    StringList<C> make_stringlist(ForwardIterable const& data)
+    {
+        StringList<C> list;
+
+        for (auto itr = data.begin(); itr != data.end(); ++itr)
+        {
+            list << *itr;
+        }
+        return list;
+    }
+
+    template <typename C = char, size_t I, size_t J, typename... Args>
+    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
+    {
+        StringList<C> list;
+
+        if constexpr (I < J)
+        {
+            list << std::get<I>(tuple);
+            list.push_back(make_stringlist<C,I+1,J>(tuple));
+        }
+        return list;
+    }
+    template <typename C = char, typename... Args>
+    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
+    {
+        return make_stringlist<C,0,sizeof...(Args),Args...>(tuple);
+    }
 
 } // namespace util
 
@@ -63,7 +104,8 @@ namespace util
     template <typename C>
     StringList<C>& StringList<C>::push_back(StringList<C> const& stringlist)
     {
-        for (std::basic_string<C> const& string : stringlist) {
+        for (std::basic_string<C> const& string : stringlist.m_List)
+        {
             m_List.push_back(string);
         }
         return *this;
@@ -72,7 +114,8 @@ namespace util
     template <typename C>
     StringList<C>& StringList<C>::push_back(StringList<C>&& stringlist)
     {
-        for (std::basic_string<C>&& string : stringlist) {
+        for (std::basic_string<C>& string : stringlist.m_List)
+        {
             m_List.push_back(std::move(string));
         }
         return *this;

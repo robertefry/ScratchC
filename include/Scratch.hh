@@ -30,14 +30,17 @@
 
 #include <optional>
 #include <variant>
-#include <tuple>
-#include <bitset>
 
+#include <bitset>
 #include <initializer_list>
+#include <tuple>
 #include <array>
 #include <vector>
 #include <list>
+#include <forward_list>
+#include <deque>
 #include <queue>
+#include <stack>
 #include <set>
 #include <unordered_set>
 #include <map>
@@ -147,37 +150,21 @@ namespace util
     template <typename C>
     class StringList;
 
-    template <typename C = char, typename ForwardIterable>
-    StringList<C> make_stringlist(ForwardIterable const& data)
-    {
-        StringList<C> list;
+    template <typename C, typename ForwardIterable>
+    StringList<C> make_stringlist(ForwardIterable const& data);
 
-        for (auto itr = data.begin(); itr != data.end(); ++itr)
-        {
-            list << *itr;
-        }
-        return list;
-    }
-
-    template <typename C = char, size_t I, size_t J, typename... Args>
-    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
-    {
-        StringList<C> list;
-
-        if constexpr (I < J)
-        {
-            list << std::get<I>(tuple);
-            list.push_back(make_stringlist<C,I+1,J>(tuple));
-        }
-        return list;
-    }
-    template <typename C = char, typename... Args>
-    StringList<C> make_stringlist(std::tuple<Args...> const& tuple)
-    {
-        return make_stringlist<C,0,sizeof...(Args),Args...>(tuple);
-    }
+    template <typename C, typename... Args>
+    StringList<C> make_stringlist(std::tuple<Args...> const& tuple);
 
 } // namespace util
+
+template <typename C, size_t N>
+inline std::basic_ostream<C>&
+operator<<(std::basic_ostream<C>& ost, std::bitset<N> const& data)
+{
+    // TODO
+    return ost << "operator<< undefined for std::bitset";
+}
 
 template <typename C, typename T>
 inline std::basic_ostream<C>&
@@ -200,72 +187,103 @@ operator<<(std::basic_ostream<C>& ost, std::array<T,N> const& data)
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename T>
+template <typename C, typename T, typename A>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::vector<T> const& data)
+operator<<(std::basic_ostream<C>& ost, std::vector<T,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename T>
+template <typename C, typename T, typename A>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::list<T> const& data)
+operator<<(std::basic_ostream<C>& ost, std::list<T,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename T>
+template <typename C, typename T, typename A>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::queue<T> const& data)
+operator<<(std::basic_ostream<C>& ost, std::forward_list<T,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename T>
+template <typename C, typename T, typename A>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::set<T> const& data)
+operator<<(std::basic_ostream<C>& ost, std::deque<T,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename T>
+template <typename C, typename T, typename S>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::unordered_set<T> const& data)
+operator<<(std::basic_ostream<C>& ost, std::queue<T,S> const& data)
+{
+    // TODO
+    return ost << "operator<< undefined for std::queue";
+}
+
+template <typename C, typename T, typename S, typename R>
+inline std::basic_ostream<C>&
+operator<<(std::basic_ostream<C>& ost, std::priority_queue<T,S,R> const& data)
+{
+    // TODO
+    return ost << "operator<< undefined for std::priority_queue";
+}
+
+template <typename C, typename T, typename S>
+inline std::basic_ostream<C>&
+operator<<(std::basic_ostream<C>& ost, std::stack<T,S> const& data)
+{
+    // TODO
+    return ost << "operator<< undefined for std::stack";
+}
+
+template <typename C, typename T, typename R>
+inline std::basic_ostream<C>&
+operator<<(std::basic_ostream<C>& ost, std::set<T,R> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename T>
+template <typename C, typename T, typename H, typename P, typename A>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::unordered_multiset<T> const& data)
+operator<<(std::basic_ostream<C>& ost, std::unordered_set<T,H,P,A> const& data)
+{
+    return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
+}
+
+template <typename C, typename T, typename H, typename P, typename A>
+inline std::basic_ostream<C>&
+operator<<(std::basic_ostream<C>& ost, std::unordered_multiset<T,H,P,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
 template <typename C, typename K, typename V>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::map<K,V> const& data)
+operator<<(std::basic_ostream<C>& ost, std::pair<K,V> const& data)
+{
+    return ost << '[' << data.first << "," << data.second << ']';
+}
+
+template <typename C, typename K, typename V, typename R, typename A>
+inline std::basic_ostream<C>&
+operator<<(std::basic_ostream<C>& ost, std::map<K,V,R,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename K, typename V>
+template <typename C, typename K, typename V, typename H, typename P, typename A>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::unordered_map<K,V> const& data)
+operator<<(std::basic_ostream<C>& ost, std::unordered_map<K,V,H,P,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
 
-template <typename C, typename K, typename V>
+template <typename C, typename K, typename V, typename H, typename P, typename A>
 inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::unordered_multimap<K,V> const& data)
-{
-    return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
-}
-
-template <typename C, typename T>
-inline std::basic_ostream<C>&
-operator<<(std::basic_ostream<C>& ost, std::span<T> const& data)
+operator<<(std::basic_ostream<C>& ost, std::unordered_multimap<K,V,H,P,A> const& data)
 {
     return ost << '[' << util::make_stringlist<C>(data).to_string(",") << ']';
 }
