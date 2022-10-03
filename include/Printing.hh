@@ -40,7 +40,7 @@ namespace util
     class StringList;
 
     template <typename C, typename ForwardIterable>
-        requires util::is_iterable_v<ForwardIterable>
+        requires util::is_std_iterable_v<ForwardIterable>
     StringList<C> make_stringlist(ForwardIterable const& data);
 
     template <typename C, typename... Args>
