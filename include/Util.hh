@@ -9,11 +9,43 @@
 #endif
 
 #include <iterator>
+#include <memory>
 
+#include <cxxabi.h>
 #include <type_traits>
 
 namespace util
 {
+
+    template <typename T>
+    std::string demangle() noexcept
+    {
+        using given_t = T; using value_t = std::remove_reference_t<given_t>;
+
+        struct free_deleter { void operator()(void* ptr) { free(ptr); }};
+        std::unique_ptr<char,free_deleter> demangled {
+            __cxxabiv1::__cxa_demangle(typeid(value_t).name(),nullptr,nullptr,nullptr) };
+        std::string result = demangled.get();
+
+        if constexpr (std::is_const_v<value_t>) {
+            result += " const";
+        }
+        if constexpr (std::is_volatile_v<value_t>) {
+            result += " volatile";
+        }
+        if constexpr (std::is_lvalue_reference_v<given_t>) {
+            result += "&";
+        }
+        if constexpr (std::is_rvalue_reference_v<given_t>) {
+            result += "&&";
+        }
+        return result;
+    }
+    template <typename T>
+    std::string demangle(T const&) noexcept
+    {
+        return demangle<T>();
+    }
 
     template <typename t_adapter>
     struct adapters : t_adapter
