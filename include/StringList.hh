@@ -2,7 +2,12 @@
 #ifndef __HH_UTIL_STRING_LIST
 #define __HH_UTIL_STRING_LIST
 
+#include "Util.hh"
+#include "Printing.hh"
+
 #include <list>
+#include <tuple>
+
 #include <string>
 #include <sstream>
 #include <iosfwd>
@@ -45,10 +50,8 @@ namespace util
 namespace util
 {
 
-    template <typename C>
-    class StringList;
-
     template <typename C = char, typename ForwardIterable>
+        requires util::is_iterable_v<ForwardIterable>
     StringList<C> make_stringlist(ForwardIterable const& data)
     {
         StringList<C> list;
