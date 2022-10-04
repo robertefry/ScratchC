@@ -8,6 +8,7 @@
 
 #include "Benchmark.hh"
 #include "Lifetime.hh"
+#include "Statistics.hh"
 
 #include <iostream>
 #include <iomanip>
@@ -52,6 +53,7 @@
 #include <memory>
 #include <functional>
 #include <chrono>
+#include <exception>
 
 #include <utility>
 #include <algorithm>

@@ -60,6 +60,17 @@ namespace util
     };
 
     template <typename T, typename = void>
+    struct is_std_hashable : std::false_type {};
+
+    template <typename T>
+    struct is_std_hashable<T,
+        std::void_t<decltype(std::declval<std::hash<T>>()(std::declval<T>()))>>
+    : std::true_type {};
+
+    template <typename T>
+    constexpr bool is_std_hashable_v = is_std_hashable<T>::value;
+
+    template <typename T, typename = void>
     struct is_std_iterable : std::false_type {};
 
     template <typename T>
@@ -70,6 +81,26 @@ namespace util
     template <typename T>
     constexpr bool is_std_iterable_v = is_std_iterable<T>::value;
 
+    template <typename Iterable>
+    struct std_iterable {
+        using iterator_t = decltype(std::begin(std::declval<Iterable>()));
+        using element_t = std::iterator_traits<iterator_t>::value_type;
+    };
+
+    template <typename Iterable>
+    using std_iterable_iterator_t = std_iterable<Iterable>::iterator_t;
+
+    template <typename Iterable>
+    using std_iterable_element_t = std_iterable<Iterable>::element_t;
+
+    template <typename T, typename = void>
+    struct has_std_size : std::false_type {};
+
+    template <typename T>
+    struct has_std_size<T,std::void_t<decltype(std::size(std::declval<T>()))>> : std::true_type {};
+
+    template <typename T>
+    constexpr bool has_std_size_v = has_std_size<T>::value;
 } // namespace util
 
 #endif /* __HH_UTIL_ */
