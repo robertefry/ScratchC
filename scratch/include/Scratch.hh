@@ -4,8 +4,6 @@
 
 #include "Util.hh"
 #include "Printing.hh"
-#include "StringList.hh"
-
 #include "Benchmark.hh"
 #include "Lifetime.hh"
 #include "Statistics.hh"

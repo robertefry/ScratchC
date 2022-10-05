@@ -1,9 +1,16 @@
 
-# Build Files
-build/*
+# ############################################################################ #
+## Project
+# ############################################################################ #
+
+.build/*
 output/*
 
-# CMake Files
+
+# ############################################################################ #
+## CMake
+# ############################################################################ #
+
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -16,42 +23,78 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+
+# ############################################################################ #
+## C++
+# ############################################################################ #
+
 # Prerequisites
 *.d
 
-# Compiled Object Files
-*.o
-*.ko
-*.lo
+# Compiled Object files
 *.slo
-*.obj
-*.elf
-
-# Compiled Static Libraries
-*.a
-*.la
 *.lo
-*.lai
-*.lib
-
-# Compiled Dynamic libraries
-*.dll
-*.so
-*.so.*
-*.dylib
+*.o
+*.obj
 
 # Precompiled Headers
 *.gch
 *.pch
 
-# Linker Output
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+
+# ############################################################################ #
+## C
+# ############################################################################ #
+
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
 *.ilk
 *.map
 *.exp
 
-# Fortran Module Files
-*.mod
-*.smod
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
 
 # Executables
 *.exe
@@ -61,7 +104,7 @@ _deps
 *.x86_64
 *.hex
 
-# Debug Files
+# Debug files
 *.dSYM/
 *.su
 *.idb

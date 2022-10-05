@@ -246,6 +246,9 @@ namespace util
 
     };
 
+    // source: https://www.calculatorsoup.com/calculators/statistics/mean-median-mode.php
+    // TODO: remove me!
+
 } // namespace util
 
 #endif /* __HH_UTIL_STATISTICS_ */
