@@ -31,20 +31,20 @@
 
 #include <ostream> // print adapter
 
-// forward-declare util::StringList here, and include it at the end
+// forward-declare "StringList.hh" here, and include it at the end
 // so that operator<< works with nested containers.
 namespace util
 {
 
     template <typename C>
-    class StringList;
+    class BasicStringList;
 
     template <typename C, typename ForwardIterable>
         requires util::is_std_iterable_v<ForwardIterable>
-    StringList<C> make_stringlist(ForwardIterable const& data);
+    BasicStringList<C> make_stringlist(ForwardIterable const& data);
 
     template <typename C, typename... Args>
-    StringList<C> make_stringlist(std::tuple<Args...> const& tuple);
+    BasicStringList<C> make_stringlist(std::tuple<Args...> const& tuple);
 
 } // namespace util
 
