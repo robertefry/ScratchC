@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 
 # Use vcpkg toolchain file
 if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-  set(CMAKE_TOOLCHAIN_FILE "vcpkg/scripts/buildsystems/vcpkg.cmake")
+  set(CMAKE_TOOLCHAIN_FILE ".vcpkg/scripts/buildsystems/vcpkg.cmake")
 endif()
 
 # Define the output directory
