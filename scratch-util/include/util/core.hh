@@ -50,6 +50,8 @@ namespace util
     template <typename t_adapter>
     struct adapters : t_adapter
     {
+        using container_type = typename t_adapter::container_type;
+
         static typename t_adapter::container_type const& get(t_adapter const& adapter) {
             return adapter.*&adapters::c;
         }

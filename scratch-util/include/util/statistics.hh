@@ -2,7 +2,7 @@
 #ifndef __HH_UTIL_STATISTICS_
 #define __HH_UTIL_STATISTICS_
 
-#include "Util.hh"
+#include "core.hh"
 
 #include <vector>
 #include <queue>

@@ -8,3 +8,15 @@ add_subdirectory(tests)
 
 # Define include directories
 target_include_directories(${BINARY_NAME} INTERFACE "include")
+
+# Use threads
+find_package(Threads)
+target_link_libraries(${BINARY_NAME} INTERFACE ${CMAKE_THREAD_LIBS_INIT})
+
+# Use fmt (header-only)
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(${BINARY_NAME} INTERFACE fmt::fmt-header-only)
+
+# Use spdlog (header-only)
+find_package(spdlog CONFIG REQUIRED)
+target_link_libraries(${BINARY_NAME} INTERFACE spdlog::spdlog_header_only)

@@ -2,11 +2,13 @@
 #ifndef __HH_SCRATCH_
 #define __HH_SCRATCH_
 
-#include "Util.hh"
-#include "Printing.hh"
-#include "Benchmark.hh"
-#include "Lifetime.hh"
-#include "Statistics.hh"
+#include "util/core.hh"
+#include "util/stringlist.hh"
+#include "util/stringlist/format.hh"
+#include "util/stringlist/stl.hh"
+#include "util/benchmark.hh"
+#include "util/lifetime.hh"
+#include "util/statistics.hh"
 
 #include <iostream>
 #include <iomanip>
