@@ -2,7 +2,7 @@
     "name": "scratch-cpp",
     "version-string": "1.0.0",
     "dependencies": [
-        "gtest",
+        "gtest", "hayai",
         "fmt", "spdlog"
     ]
 }
