@@ -63,7 +63,7 @@ namespace util
         template <typename Iterator>
         static value_t min(Iterator const& begin, Iterator const& end)
         {
-            return *std::min_element(begin,end);
+            return (value_t)*std::min_element(begin,end);
         }
 
         template <typename Iterable>
@@ -78,7 +78,7 @@ namespace util
         template <typename Iterator>
         static value_t max(Iterator const& begin, Iterator const& end)
         {
-            return *std::max_element(begin,end);
+            return (value_t)*std::max_element(begin,end);
         }
 
         template <typename Iterable>
@@ -100,7 +100,7 @@ namespace util
                 if (*min > *itr) min = itr;
                 if (*max < *itr) max = itr;
             }
-            return *max - *min;
+            return (value_t)*max - (value_t)*min;
         }
 
         template <typename Iterable>
@@ -130,7 +130,7 @@ namespace util
             {
                 return p1.second < p2.second;
             });
-            return max->first;
+            return (value_t)max->first;
         }
 
         template <typename Iterable>
@@ -146,17 +146,31 @@ namespace util
         static value_t __median(Iterator const& begin, Iterator const& end, size_t count)
         {
             using data_t = std::iterator_traits<Iterator>::value_type;
-            using min_heap_t = std::priority_queue<data_t,std::vector<data_t>,std::greater<data_t>>;
-            min_heap_t min_heap; util::adapters<min_heap_t>::get(min_heap).reserve(1+count/2);
+            size_t size = 1+count/2;
+            std::vector<data_t> min_heap (begin,begin+size);
 
-            for (auto [i,itr] = std::tuple{size_t{0},begin}; i < count; ++i, ++itr)
+            auto sift_down = [&](size_t index)
             {
-                if (i > count/2) min_heap.pop();
-                min_heap.push(*itr);
+                size_t size = min_heap.size();
+                for (size_t i = index, j = i; true; i = j)
+                {
+                    size_t l = 2*i+1, r = 2*i+2;
+
+                    if (l >= size) break; // i is a leaf node
+                    j = (r >= size) ? l : (min_heap[l] < min_heap[r]) ? l : r;
+                    if (min_heap[i] > min_heap[j]) std::swap(min_heap[i],min_heap[j]);
+                }
+            };
+            for (size_t i = size-1; i < size; --i) sift_down(i);
+
+            for (auto itr = begin+size; itr != end; ++itr)
+            {
+                if (*itr < min_heap[0]) continue;
+                min_heap[0] = *itr; sift_down(0);
             }
 
-            value_t top = min_heap.top();min_heap.pop();
-            return (count % 2 == 0) ? (top + (value_t)min_heap.top()) / 2 : top;
+            return (count % 2 == 1) ? (value_t)min_heap[0]
+                : ((value_t)min_heap[0] + (value_t)std::min(min_heap[1],min_heap[2])) / 2;
         }
 
     public:
