@@ -6,6 +6,7 @@
 #include "util/stringlist.hh"
 #include "util/stringlist/format.hh"
 #include "util/stringlist/stl.hh"
+#include "util/logging.hh"
 #include "util/benchmark.hh"
 #include "util/lifetime.hh"
 #include "util/statistics.hh"
