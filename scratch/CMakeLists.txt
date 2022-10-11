@@ -19,7 +19,7 @@ file(GLOB_RECURSE BINARY_SOURCES
 )
 target_sources(${BINARY_NAME} PRIVATE ${BINARY_SOURCES})
 
-target_link_libraries(${BINARY_NAME} scratch-util)
+target_link_libraries(${BINARY_NAME} PRIVATE scratch-util)
 
 # Add launch target
 add_custom_target(run-scratch

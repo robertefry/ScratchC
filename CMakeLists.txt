@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.5)
-execute_process(COMMAND ${CMAKE_SOURCE_DIR}/bootstrap.sh)
+execute_process(COMMAND ${CMAKE_SOURCE_DIR}/bootstrap.sh WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 # Use vcpkg toolchain file
 if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)

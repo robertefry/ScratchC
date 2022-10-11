@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.5)
 # Define binary
 set(BINARY_NAME "scratch-util")
 add_library(${BINARY_NAME} INTERFACE)
+
 add_subdirectory(tests)
 add_subdirectory(benchmarks)
 

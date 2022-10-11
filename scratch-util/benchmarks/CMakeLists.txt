@@ -25,9 +25,6 @@ target_link_libraries(${BINARY_NAME} PRIVATE scratch-util)
 find_package(hayai CONFIG REQUIRED)
 target_link_libraries(${BINARY_NAME} PRIVATE hayai_main)
 
-# Add test target
-add_test(NAME ${BINARY_NAME} COMMAND $<TARGET_FILE:${BINARY_NAME}>)
-
 # Add launch target
 add_custom_target(benchmark-scratch-util
   COMMAND $<TARGET_FILE:${BINARY_NAME}>
