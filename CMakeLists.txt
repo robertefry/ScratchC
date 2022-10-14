@@ -20,3 +20,4 @@ enable_testing()
 
 add_subdirectory(scratch)
 add_subdirectory(scratch-util)
+add_subdirectory(scratch-challenge)
