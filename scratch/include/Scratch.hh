@@ -60,6 +60,7 @@
 #include <algorithm>
 #include <numeric>
 #include <limits>
+#include <random>
 
 #include <thread>
 #include <future>
