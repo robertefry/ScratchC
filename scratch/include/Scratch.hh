@@ -26,6 +26,7 @@
 #include <cassert>
 #include <climits>
 #include <cmath>
+#include <cfloat>
 #include <ctime>
 
 #include <complex>
