@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_
-#define __HH_UTIL_
+#ifndef HH_UTIL_CORE
+#define HH_UTIL_CORE
 
 #ifdef __GNUC__
 #define SC_GetFunctionName() __PRETTY_FUNCTION__
@@ -105,4 +105,4 @@ namespace util
     constexpr bool has_std_size_v = has_std_size<T>::value;
 } // namespace util
 
-#endif /* __HH_UTIL_ */
+#endif /* HH_UTIL_CORE */

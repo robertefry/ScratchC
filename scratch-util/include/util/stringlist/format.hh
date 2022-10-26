@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_STRING_LIST_FORMAT_
-#define __HH_UTIL_STRING_LIST_FORMAT_
+#ifndef HH_UTIL_STRING_LIST_FORMAT
+#define HH_UTIL_STRING_LIST_FORMAT
 
 #include "util/core.hh"
 
@@ -71,4 +71,4 @@ namespace util::format
 
 } // namespace util::format
 
-#endif /* __HH_UTIL_STRING_LIST_FORMAT_ */
+#endif /* HH_UTIL_STRING_LIST_FORMAT */

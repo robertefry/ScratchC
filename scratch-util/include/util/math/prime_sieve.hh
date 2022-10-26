@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_MATH_PRIME_SIEVE_
-#define __HH_UTIL_MATH_PRIME_SIEVE_
+#ifndef HH_UTIL_MATH_PRIME_SIEVE
+#define HH_UTIL_MATH_PRIME_SIEVE
 
 #include "util/math/integer.hh"
 
@@ -175,4 +175,4 @@ namespace util::math
 
 } // namespace util::math
 
-#endif /* __HH_UTIL_MATH_PRIME_SIEVE_ */
+#endif /* HH_UTIL_MATH_PRIME_SIEVE */

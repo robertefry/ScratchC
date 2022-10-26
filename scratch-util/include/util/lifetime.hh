@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_LIFETIME_
-#define __HH_UTIL_LIFETIME_
+#ifndef HH_UTIL_LIFETIME
+#define HH_UTIL_LIFETIME
 
 #include "core.hh"
 
@@ -45,4 +45,4 @@ namespace util
 
 } // namespace util
 
-#endif /* __HH_UTIL_LIFETIME_ */
+#endif /* HH_UTIL_LIFETIME */

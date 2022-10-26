@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_STATISTICS_
-#define __HH_UTIL_STATISTICS_
+#ifndef HH_UTIL_STATISTICS
+#define HH_UTIL_STATISTICS
 
 #include "core.hh"
 
@@ -265,4 +265,4 @@ namespace util
 
 } // namespace util
 
-#endif /* __HH_UTIL_STATISTICS_ */
+#endif /* HH_UTIL_STATISTICS */

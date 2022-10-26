@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_STRING_LIST_STL_
-#define __HH_UTIL_STRING_LIST_STL_
+#ifndef HH_UTIL_STRING_LIST_STL
+#define HH_UTIL_STRING_LIST_STL
 
 #include "util/core.hh"
 #include "util/stringlist.hh"
@@ -244,4 +244,4 @@ namespace util
 
 } // namespace util
 
-#endif /* __HH_UTIL_STRING_LIST_STL_ */
+#endif /* HH_UTIL_STRING_LIST_STL */

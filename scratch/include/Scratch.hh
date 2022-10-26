@@ -1,6 +1,6 @@
 
-#ifndef __HH_SCRATCH_
-#define __HH_SCRATCH_
+#ifndef HH_SCRATCH
+#define HH_SCRATCH
 
 #include "util/core.hh"
 #include "util/stringlist.hh"
@@ -71,4 +71,4 @@
 #include <concepts>
 #include <type_traits>
 
-#endif /* __HH_SCRATCH_ */
+#endif /* HH_SCRATCH */

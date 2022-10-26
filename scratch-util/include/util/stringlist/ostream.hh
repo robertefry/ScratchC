@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_STRING_LIST_OSTREAM_
-#define __HH_UTIL_STRING_LIST_OSTREAM_
+#ifndef HH_UTIL_STRING_LIST_OSTREAM
+#define HH_UTIL_STRING_LIST_OSTREAM
 
 #include "util/stringlist.hh"
 
@@ -33,4 +33,4 @@ std::basic_ostream<C>& operator<<(std::basic_ostream<C>& ost, T const& t)
     return ost << strl.to_string();
 }
 
-#endif /* __HH_UTIL_STRING_LIST_OSTREAM_ */
+#endif /* HH_UTIL_STRING_LIST_OSTREAM */

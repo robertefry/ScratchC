@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_STRING_LIST_
-#define __HH_UTIL_STRING_LIST_
+#ifndef HH_UTIL_STRING_LIST
+#define HH_UTIL_STRING_LIST
 
 #include <list>
 #include <string>
@@ -205,4 +205,4 @@ namespace util
 
 } // namespace util
 
-#endif /* __HH_UTIL_STRING_LIST_ */
+#endif /* HH_UTIL_STRING_LIST */

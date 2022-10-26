@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_MATH_INTEGER_
-#define __HH_UTIL_MATH_INTEGER_
+#ifndef HH_UTIL_MATH_INTEGER
+#define HH_UTIL_MATH_INTEGER
 
 #include <climits>
 #include <bit>
@@ -28,4 +28,4 @@ namespace util::math
 
 } // namespace util::math
 
-#endif /* __HH_UTIL_MATH_INTEGER_ */
+#endif /* HH_UTIL_MATH_INTEGER */

@@ -1,6 +1,6 @@
 
-#ifndef __HH_UTIL_LOGGING_
-#define __HH_UTIL_LOGGING_
+#ifndef HH_UTIL_LOGGING
+#define HH_UTIL_LOGGING
 
 #include "util/stringlist/ostream.hh"
 
@@ -41,4 +41,4 @@ template <typename C, typename T>
 struct fmt::formatter<T,C> : fmt::basic_ostream_formatter<C>
 {};
 
-#endif /* __HH_UTIL_LOGGING_ */
+#endif /* HH_UTIL_LOGGING */
