@@ -15,7 +15,7 @@ namespace util
         {
             std::cout << SC_GetFunctionName() << "\n";
         }
-        LifetimeTracker(int)
+        explicit LifetimeTracker(int)
         {
             std::cout << SC_GetFunctionName() << "\n";
         }
@@ -27,16 +27,16 @@ namespace util
         {
             std::cout << SC_GetFunctionName() << "\n";
         }
-        LifetimeTracker(LifetimeTracker&&)
-        {
-            std::cout << SC_GetFunctionName() << "\n";
-        }
         LifetimeTracker& operator=(LifetimeTracker const&)
         {
             std::cout << SC_GetFunctionName() << "\n";
             return *this;
         }
-        LifetimeTracker& operator=(LifetimeTracker&&)
+        LifetimeTracker(LifetimeTracker&&) noexcept
+        {
+            std::cout << SC_GetFunctionName() << "\n";
+        }
+        LifetimeTracker& operator=(LifetimeTracker&&) noexcept
         {
             std::cout << SC_GetFunctionName() << "\n";
             return *this;

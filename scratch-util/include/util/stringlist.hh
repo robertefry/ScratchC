@@ -22,10 +22,17 @@ namespace util
     class basic_stringlist
     {
     public:
-        explicit basic_stringlist() = default;
         virtual ~basic_stringlist() = default;
+        explicit basic_stringlist() = default;
 
-        operator std::basic_string<C>() const { return to_string(); }
+        explicit operator std::basic_string<C>() const { return to_string(); }
+
+    public:
+        basic_stringlist(basic_stringlist const&) = default;
+        basic_stringlist& operator=(basic_stringlist const&) = default;
+
+        basic_stringlist(basic_stringlist&&) noexcept = default;
+        basic_stringlist& operator=(basic_stringlist&&) noexcept = default;
 
     public:
         basic_stringlist<C>& operator<<(basic_stringlist<C> const&);
@@ -165,7 +172,7 @@ namespace util
     basic_stringlist<C>& basic_stringlist<C>::operator<<(T&& obj)
     {
         basic_stringlist<C> strl;
-        basic_stringlist_formatter<C,T>{}.format(strl,std::move(obj));
+        basic_stringlist_formatter<C,T>{}.format(strl,std::forward<T>(obj));
         return this->operator<<(std::move(strl));
     }
 
@@ -176,12 +183,12 @@ namespace util
         for (auto const& string : m_List) {
             size += string.size();
         }
-        if (m_List.size()) size += delim.size() * (m_List.size()-1);
+        if (not m_List.empty()) size += delim.size() * (m_List.size()-1);
 
         std::basic_string<C> result;
         result.reserve(size);
 
-        if (m_List.size())
+        if (not m_List.empty())
         {
             auto itr = m_List.begin();
             result += *itr;

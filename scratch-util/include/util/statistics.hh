@@ -115,7 +115,7 @@ namespace util
         template <typename Iterator>
         static value_t mode(Iterator const& begin, Iterator const& end)
         {
-            using data_t = std::iterator_traits<Iterator>::value_type;
+            using data_t = typename std::iterator_traits<Iterator>::value_type;
             using count_map_t = std::conditional_t<util::is_std_hashable_v<data_t>,
                 std::unordered_map<data_t,size_t>, std::map<data_t,size_t> >;
             count_map_t count_map;
@@ -143,9 +143,9 @@ namespace util
     private:
 
         template <typename Iterator>
-        static value_t __median(Iterator const& begin, Iterator const& end, size_t count)
+        static value_t _median(Iterator const& begin, Iterator const& end, size_t count)
         {
-            using data_t = std::iterator_traits<Iterator>::value_type;
+            using data_t = typename std::iterator_traits<Iterator>::value_type;
             size_t size = 1+count/2;
             std::vector<data_t> min_heap (begin,begin+size);
 
@@ -178,13 +178,13 @@ namespace util
         template <typename Iterator>
         static value_t median(Iterator const& begin, Iterator const& end)
         {
-            return stats::__median(begin,end,stats::count(begin,end));
+            return stats::_median(begin,end,stats::count(begin,end));
         }
 
         template <typename Iterable>
         static value_t median(Iterable const& data)
         {
-            return stats::__median(std::begin(data),std::end(data),stats::count(data));
+            return stats::_median(std::begin(data),std::end(data),stats::count(data));
         }
 
         // stats::mean
@@ -193,7 +193,7 @@ namespace util
         template <typename Iterator>
         static value_t mean(Iterator const& begin, Iterator const& end)
         {
-            using data_t = std::iterator_traits<Iterator>::value_type;
+            using data_t = typename std::iterator_traits<Iterator>::value_type;
             data_t sum = data_t{}; size_t count = 0;
 
             for (Iterator itr = begin; itr != end; ++itr)

@@ -86,14 +86,14 @@ namespace util
     template <typename Iterable>
     struct std_iterable {
         using iterator_t = decltype(std::begin(std::declval<Iterable>()));
-        using element_t = std::iterator_traits<iterator_t>::value_type;
+        using element_t = typename std::iterator_traits<iterator_t>::value_type;
     };
 
     template <typename Iterable>
-    using std_iterable_iterator_t = std_iterable<Iterable>::iterator_t;
+    using std_iterable_iterator_t = typename std_iterable<Iterable>::iterator_t;
 
     template <typename Iterable>
-    using std_iterable_element_t = std_iterable<Iterable>::element_t;
+    using std_iterable_element_t = typename std_iterable<Iterable>::element_t;
 
     template <typename T, typename = void>
     struct has_std_size : std::false_type {};

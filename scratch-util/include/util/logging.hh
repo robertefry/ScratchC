@@ -17,7 +17,7 @@
 namespace util
 {
 
-    auto logger()
+    inline auto logger()
     {
         static auto logger = []()
         {

@@ -4,6 +4,8 @@
 
 #include "util/core.hh"
 
+namespace util { template <typename C> class basic_stringlist; }
+
 namespace util::format
 {
 
