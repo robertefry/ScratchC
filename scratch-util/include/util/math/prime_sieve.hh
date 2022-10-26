@@ -32,11 +32,11 @@ namespace util::math
             m_Size = num_chunks * sizeof(chunk_t) * CHAR_BIT * 2 + 3;
         }
 
-        static size_t idx(size_t i) { return (i-3)>>1; }
+        static size_t idx(size_t i) { return (i-3) / 2; }
         static size_t chk(size_t i) { return idx(i) / (sizeof(chunk_t) * CHAR_BIT); }
         static size_t bit(size_t i) { return idx(i) % (sizeof(chunk_t) * CHAR_BIT); }
 
-        auto operator[](size_t i) const { return m_Chunks.get()[chk(i)] & (0x1 << bit(i)); }
+        auto operator[](size_t i) const { return m_Chunks.get()[chk(i)] & (chunk_t::base_t{0x1} << bit(i)); }
 
         inline void run(size_t num_workers);
         inline auto get_sieve() const -> std::vector<bool>;
@@ -63,7 +63,7 @@ namespace util::math
                 m_JobQueue.notify_all();
                 for (auto& worker : m_Workers) if (worker.joinable()) worker.join();
 
-                while (m_JobQueue.size())
+                while (not m_JobQueue.empty())
                 {
                     auto job = std::move(m_JobQueue.front()); m_JobQueue.pop();
                     job();
@@ -93,7 +93,7 @@ namespace util::math
                         if (m_JobQueue.empty()) m_JobQueue.wait(lock);
 
                         if (m_ShouldTerminate) return;
-                        else if (m_JobQueue.empty()) continue;
+                        if (m_JobQueue.empty()) continue;
                         job = std::move(m_JobQueue.front()); m_JobQueue.pop();
                     }
                     job();
@@ -136,7 +136,7 @@ namespace util::math
     {
         size_t const num_primes = [x=m_Size]() -> size_t // prime-counting function upper-bound
         {
-            size_t est = 2 * x / log2i(x);
+            size_t est = (x == 0) ? 0 : 2 * x / log2i(x);
             return est - (est >> 4) - (est >> 5);
         }();
 
@@ -152,7 +152,7 @@ namespace util::math
         return primes;
     }
 
-    std::vector<size_t> nth_primes(size_t n)
+    inline std::vector<size_t> nth_primes(size_t n)
     {
         if (n <= 16) return {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53};
 
