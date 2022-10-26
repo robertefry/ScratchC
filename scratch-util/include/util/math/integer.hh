@@ -10,12 +10,12 @@ namespace util::math
 
     template <typename uint_t> auto log2i(uint_t x) -> uint_t
     {
-        return sizeof(x) * CHAR_BIT - std::countl_zero(x) - 1;
+        return sizeof(x) * CHAR_BIT - std::countl_zero(x);
     }
 
     template <typename uint_t> auto isqrt(uint_t x) -> uint_t
     {
-        uint_t x_last = 0, x_curr = 0x1 << (log2i(x) >> 1);
+        uint_t x_last = 0, x_curr = uint_t{0x1} << (log2i(x) >> 1);
         while (x_curr != x_last)
         {
             x_last = x_curr;
