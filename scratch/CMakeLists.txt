@@ -1,27 +1,29 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-# Define binary
+# ---- binary ----
+
 set(BINARY_NAME "scratch")
 add_executable(${BINARY_NAME} "")
 
-# Define compiler configuration
-target_compile_options(${BINARY_NAME} PRIVATE -Wall -Wextra -Weffc++ -Wpedantic)
-target_compile_options(${BINARY_NAME} PRIVATE -Wno-unused)
+target_link_libraries(${BINARY_NAME} PUBLIC scratch-util)
 
-# Define include directories
-target_include_directories(${BINARY_NAME} PUBLIC "include")
-target_include_directories(${BINARY_NAME} PRIVATE "src")
+# ---- cmake targets ----
 
-# Define build sources
-file(GLOB_RECURSE BINARY_SOURCES
-  "src/*.c" "src/*.cc" "src/*.cpp" "src/*.cxx"
-)
-target_sources(${BINARY_NAME} PRIVATE ${BINARY_SOURCES})
-
-target_link_libraries(${BINARY_NAME} PRIVATE scratch-util)
-
-# Add launch target
-add_custom_target(run-scratch
+add_custom_target(run-${BINARY_NAME}
   COMMAND $<TARGET_FILE:${BINARY_NAME}>
   DEPENDS ${BINARY_NAME})
+
+# ---- compiler targets ----
+
+target_include_directories(${BINARY_NAME}
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+  PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+file(GLOB_RECURSE BINARY_SOURCES
+  "src/*.c" "src/*.cc" "src/*.cpp" "src/*.cxx")
+target_sources(${BINARY_NAME} PRIVATE ${BINARY_SOURCES})

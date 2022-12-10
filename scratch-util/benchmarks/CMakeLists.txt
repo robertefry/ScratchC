@@ -1,31 +1,31 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-# Define binary
-set(BINARY_NAME "scratch-util-benchmarks")
-add_executable(${BINARY_NAME} "")
+# ---- binary ----
 
-# Define compiler configuration
-target_compile_options(${BINARY_NAME} PRIVATE -Wall -Wextra -Weffc++ -Wpedantic)
-target_compile_options(${BINARY_NAME} PRIVATE -Wno-unused)
+set(BENCH_NAME ${BINARY_NAME}-benchmarks)
+add_executable(${BENCH_NAME} "")
 
-# Define include directories
-target_include_directories(${BINARY_NAME} PUBLIC "include")
-target_include_directories(${BINARY_NAME} PRIVATE "src")
+target_link_libraries(${BENCH_NAME} PUBLIC ${BINARY_NAME})
 
-# Define build sources
-file(GLOB_RECURSE BINARY_SOURCES
-  "src/*.c" "src/*.cc" "src/*.cpp" "src/*.cxx"
+# ---- cmake targets ----
+
+add_custom_target(bench-${BENCH_NAME}
+  COMMAND $<TARGET_FILE:${BENCH_NAME}>
+  DEPENDS ${BENCH_NAME})
+
+# ---- compiler targets ----
+
+target_include_directories(${BENCH_NAME}
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+  PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
-target_sources(${BINARY_NAME} PRIVATE ${BINARY_SOURCES})
 
-target_link_libraries(${BINARY_NAME} PRIVATE scratch-util)
+file(GLOB_RECURSE BINARY_SOURCES
+  "src/*.c" "src/*.cc" "src/*.cpp" "src/*.cxx")
+target_sources(${BENCH_NAME} PRIVATE ${BINARY_SOURCES})
 
-# Use hayai
-find_package(hayai CONFIG REQUIRED)
-target_link_libraries(${BINARY_NAME} PRIVATE hayai_main)
-
-# Add launch target
-add_custom_target(benchmark-scratch-util
-  COMMAND $<TARGET_FILE:${BINARY_NAME}>
-  DEPENDS ${BINARY_NAME})
+target_link_libraries(${BENCH_NAME} PRIVATE hayai_main)
